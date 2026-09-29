@@ -14,6 +14,8 @@ export const previewDeployments = pgTable("preview_deployments", {
 		.notNull()
 		.primaryKey()
 		.$defaultFn(() => nanoid()),
+	branchRepoOwner: text("branchRepoOwner"),
+	branchRepoName: text("branchRepoName"),
 	branch: text("branch").notNull(),
 	pullRequestId: text("pullRequestId").notNull(),
 	pullRequestNumber: text("pullRequestNumber").notNull(),
@@ -61,6 +63,8 @@ export const createSchema = createInsertSchema(previewDeployments, {
 export const apiCreatePreviewDeployment = z.object({
 	applicationId: z.string().min(1),
 	domainId: z.string().optional(),
+	branchRepoOwner: z.string().optional(),
+	branchRepoName: z.string().optional(),
 	branch: z.string().min(1),
 	pullRequestId: z.string().min(1),
 	pullRequestNumber: z.string().min(1),

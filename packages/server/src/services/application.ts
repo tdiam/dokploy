@@ -438,6 +438,8 @@ export const deployPreviewApplication = async ({
 			command += await cloneGithubRepository({
 				...application,
 				appName: previewDeployment.appName,
+				owner: previewDeployment.branchRepoOwner ?? application.owner,
+				repository: previewDeployment.branchRepoName ?? application.repository,
 				branch: previewDeployment.branch,
 			});
 			command += await getBuildCommand(application);

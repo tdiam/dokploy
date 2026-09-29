@@ -460,6 +460,8 @@ export default async function handler(
 				secureApps.push(app);
 			}
 
+			const prBranchRepoOwner = githubBody?.pull_request?.head?.repo?.owner?.login;
+			const prBranchRepoName = githubBody?.pull_request?.head?.repo?.name;
 			const prBranch = githubBody?.pull_request?.head?.ref;
 
 			const prNumber = githubBody?.pull_request?.number;
@@ -510,6 +512,8 @@ export default async function handler(
 					}
 					const previewDeployment = await createPreviewDeployment({
 						applicationId: app.applicationId as string,
+						branchRepoOwner: prBranchRepoOwner,
+						branchRepoName: prBranchRepoName,
 						branch: prBranch,
 						pullRequestId: prId,
 						pullRequestNumber: prNumber,
